@@ -18,13 +18,11 @@ Game::Game() {
 }
 
 void Game::Update() {
-	m_player->Update();
-	while (m_clock.getElapsedTime().asMilliseconds() >= 500) {
+	m_player->Update(m_alienGrid);
+	while (m_clock.getElapsedTime().asMilliseconds() >= 1000) {
 		MoveAliens();
-		for(int i = 0; i < constants::k_alienRows; ++i)
-		{
-			for(auto alien : m_alienGrid[i])
-			{
+		for (int i = 0; i < constants::k_alienRows; ++i) {
+			for (auto alien : m_alienGrid[i]) {
 				alien->Update();
 			}
 		}
@@ -50,7 +48,7 @@ void Game::MoveAliens() {
 	}
 
 	bool movingDown{ false };
-	
+
 	for (int i = 0; i < constants::k_alienRows; ++i) {
 		for (int j = 0; j < constants::k_alienColumns; ++j) {
 			if (m_alienGrid[i][j]->GetAlive()) {
@@ -70,8 +68,7 @@ void Game::MoveAliens() {
 		}
 	}
 
-	if(movingDown)
-	{
+	if (movingDown) {
 		for (int i = 0; i < constants::k_alienRows; ++i) {
 			for (int j = 0; j < constants::k_alienColumns; ++j) {
 				if (m_alienGrid[i][j]->GetAlive()) {

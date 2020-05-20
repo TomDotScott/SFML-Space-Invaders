@@ -3,8 +3,8 @@
 class Alien final : public Entity {
 public:
 	explicit Alien(const std::string& _fileName) {
+		setOrigin(getGlobalBounds().width / 2, getGlobalBounds().height / 2);
 		LoadTexture(_fileName, 2);
-		std::cout << "AMOUTN OF FRAMES" << m_textures.size();
 		scale(0.5f, 0.5f);
 	}
 
@@ -12,6 +12,7 @@ public:
 
 	void Render(sf::RenderWindow& _window);
 
+	void SetAlive(const bool _status) { m_alive = _status; }
 	bool GetAlive() const { return m_alive; }
 	
 private:

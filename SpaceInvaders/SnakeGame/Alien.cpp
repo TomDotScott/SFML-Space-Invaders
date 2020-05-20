@@ -9,11 +9,11 @@ void Alien::Update()
 	
 	if(getPosition() != m_previousPosition)
 	{
-		std::cout << "Changing textures" << "Current Frame : " << m_currentFrame << std::endl;
 		setTexture(m_textures[m_currentFrame]);
 	}
 
 	m_currentFrame++;
+
 }
 
 void Alien::Render(sf::RenderWindow& _window)
