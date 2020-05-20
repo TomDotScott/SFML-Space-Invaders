@@ -5,7 +5,7 @@
 
 class Entity : public sf::Sprite {
 public:
-	void LoadTexture(std::string& _fileName)
+	void LoadTexture(const std::string& _fileName)
 	{
 		if (m_texture.loadFromFile("Resources/" + _fileName)) {
 			std::cout << "Texture loaded";
@@ -13,7 +13,7 @@ public:
 		}
 	};
 
-	void Update(float _velocityMultiplier);
+	void Update(sf::Vector2f _velocityMultiplier);
 
 	bool CheckCollision(Entity* _collision) const;
 

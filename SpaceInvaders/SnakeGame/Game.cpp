@@ -3,6 +3,8 @@
 Game::Game(){
 	std::string playerName = "Player.png";
 	m_player = new Player(playerName);
+	m_player->setPosition({ constants::k_screenWidth / 2 - m_player->getGlobalBounds().width / 2, 
+		constants::k_screenHeight - 64 });
 }
 
 void Game::Update() {
@@ -10,5 +12,5 @@ void Game::Update() {
 }
 
 void Game::Render(sf::RenderWindow& _window) const {
-	_window.draw(*m_player);
+	m_player->Render(_window);
 }
