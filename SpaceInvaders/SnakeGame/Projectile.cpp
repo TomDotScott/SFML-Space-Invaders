@@ -11,7 +11,7 @@ void Projectile::Update() {
 	}
 
 	if (!m_shootable) {
-		Entity::Update({ 1, 0.1f });
+		Entity::Update({ 1, 0.5f });
 	}
 
 	if(getPosition().y < 0)

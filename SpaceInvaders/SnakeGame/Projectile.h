@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 enum class EDirection {
-	eUp, eDown
+	eUp, eDown, eLeft, eRight
 };
 
 class Projectile final : public Entity {
