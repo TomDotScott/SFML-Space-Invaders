@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Constants.h"
 
-void Player::Update(const std::vector<std::vector<Alien*>>& _aliensGrid)
+void Player::Update(const std::vector<std::vector<Entity*>>& _aliensGrid)
 {
 	m_velocity.x = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) - sf::Keyboard::isKeyPressed(sf::Keyboard::A);
 	Entity::Update({ 0.1f , 1});
@@ -19,7 +19,7 @@ void Player::Update(const std::vector<std::vector<Alien*>>& _aliensGrid)
 	}
 	
 	if (!m_projectile->GetShootable()) {
-		m_projectile->Update(_aliensGrid);
+		m_projectile->Update(_aliensGrid, this);
 		m_canShoot = false;
 	}else
 	{

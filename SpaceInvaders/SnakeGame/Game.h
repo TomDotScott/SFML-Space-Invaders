@@ -13,7 +13,7 @@ private:
 	void MoveAliens();
 	
 	Player* m_player;
-	std::vector<std::vector<Alien*>> m_alienGrid;
+	std::vector<std::vector<Entity*>> m_alienGrid;
 
 	EDirection m_currentDirection{EDirection::eRight};
 

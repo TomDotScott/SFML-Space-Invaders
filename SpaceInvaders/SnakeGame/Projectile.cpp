@@ -1,13 +1,12 @@
 #include "Projectile.h"
+
+#include "Alien.h"
 #include "Constants.h"
-void Projectile::Update(const std::vector<std::vector<Alien*>>& _aliensGrid) {
-	switch (m_direction) {
-	case EDirection::eUp:
+void Projectile::Update(const std::vector<std::vector<Entity*>>& _aliensGrid, Entity* _player) {
+	if (m_direction == EDirection::eUp) {
 		m_velocity = { 0, -1 };
-		break;
-	case EDirection::eDown:
+	}else{
 		m_velocity = { 0, 1 };
-		break;
 	}
 
 	if (!m_shootable) {
@@ -19,10 +18,20 @@ void Projectile::Update(const std::vector<std::vector<Alien*>>& _aliensGrid) {
 		m_shootable = true;
 	}
 
-	CheckCollisions(_aliensGrid);
+	if (m_type == EType::ePlayer) {
+		CheckCollisions(_aliensGrid);
+	}else
+	{
+		CheckCollision(_player);
+	}
 }
 
-void Projectile::CheckCollisions(const std::vector<std::vector<Alien*>>& _aliensGrid) {
+void Projectile::RandomiseSprite()
+{
+	setTexture(m_textures[rand() % m_textures.size()]);
+}
+
+void Projectile::CheckCollisions(const std::vector<std::vector<Entity*>>& _aliensGrid) {
 	for (const auto& row : _aliensGrid) {
 		for (auto alien : row) {
 			auto* alienPointer = dynamic_cast<Alien*>(alien);
@@ -34,5 +43,12 @@ void Projectile::CheckCollisions(const std::vector<std::vector<Alien*>>& _aliens
 			}
 		}
 	}
+}
 
+void Projectile::CheckCollisions(Entity* _player) {
+	if(CheckCollision(_player))
+	{
+		//Kill the players
+		std::cout << "I HIT THE PLAYER" << std::endl;
+	}
 }
