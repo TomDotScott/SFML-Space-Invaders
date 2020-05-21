@@ -8,7 +8,27 @@ Game::Game() {
 	for (int i = 0; i < constants::k_alienRows; ++i) {
 		std::vector<Alien*> alienRow;
 		for (int j = 0; j < constants::k_alienColumns; ++j) {
-			auto* alien = new Alien("ClassicAlien_");
+			Alien* alien;
+			switch ((i) % constants::k_alienRows)
+			{
+			case 0:
+				alien = new Alien("Row_1_");
+				break;
+			case 1:
+				alien = new Alien("Row_2_");
+				break;
+			case 2:
+				alien = new Alien("Row_2_");
+				break;
+			case 3:
+				alien = new Alien("Row_4_");
+				break;
+			case 4:
+				alien = new Alien("Row_4_");
+				break;
+			default:
+				break;
+			}
 			alien->setPosition({ (static_cast<float>(j) * alien->getGlobalBounds().width) + j * constants::k_alienOffsetX, static_cast<float>(i) * constants::k_alienOffsetY });
 			alienRow.push_back(alien);
 		}
@@ -42,7 +62,7 @@ void Game::Render(sf::RenderWindow& _window) const {
 }
 
 void Game::MoveAliens() {
-	float offset{ 64 };
+	float offset{ 32 };
 	if (m_currentDirection == EDirection::eLeft) {
 		offset *= -1;
 	}
@@ -59,7 +79,7 @@ void Game::MoveAliens() {
 						movingDown = true;
 					}
 				} else {
-					if (m_alienGrid[i][j]->getPosition().x + offset / 2 < 0) {
+					if (m_alienGrid[i][j]->getPosition().x - offset / 4 < 0) {
 						m_currentDirection = EDirection::eRight;
 						movingDown = true;
 					}
