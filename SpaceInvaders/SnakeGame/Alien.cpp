@@ -1,10 +1,8 @@
 #include "Alien.h"
 
+#include "Game.h"
 
-
-void Alien::Update()
-{
-	Animate();
+void Alien::Update() {
 	if (!m_projectile->GetShootable()) {
 		m_projectile->Update();
 		m_canShoot = false;
@@ -27,20 +25,25 @@ void Alien::Animate() {
 	m_currentFrame++;
 }
 
-void Alien::Render(sf::RenderWindow& _window) const
-{
+void Alien::Render(sf::RenderWindow& _window) const {
 	if (!m_projectile->GetShootable()) {
 		_window.draw(*m_projectile);
 	}
 	_window.draw(*this);
 }
 
-void Alien::Shoot() const
-{
+void Alien::Shoot() const {
 	if (m_projectile->GetShootable()) {
 		std::cout << "PROJECTILE SHOT" << std::endl;
 		m_projectile->SetShootable(false);
 		m_projectile->RandomiseSprite();
 		m_projectile->setPosition({ getPosition().x + getGlobalBounds().width / 2,  getPosition().y });
 	}
+}
+
+void Alien::SetAlive(const bool _status) {
+
+	m_alive = _status;
+	Game::Instance().AddScore(m_points);
+
 }

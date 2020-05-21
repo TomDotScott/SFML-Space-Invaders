@@ -15,12 +15,12 @@ Game::Game() {
 			Alien* alien;
 			//decide the alien type
 			if (i % constants::k_alienRows == 0) {
-				alien = new Alien("Row_1_");
+				alien = new Alien("Row_1_", 30);
 			} else if (i % constants::k_alienRows == 1 || i % constants::k_alienRows == 2) {
-				alien = new Alien("Row_2_");
+				alien = new Alien("Row_2_", 20);
 
 			} else {
-				alien = new Alien("Row_4_");
+				alien = new Alien("Row_4_", 10);
 
 			}
 			alien->setPosition({ (static_cast<float>(j) * alien->getGlobalBounds().width) + j * constants::k_alienOffsetX, static_cast<float>(i + 1) * constants::k_alienOffsetY });
@@ -58,6 +58,7 @@ void Game::Update() {
 						p->Shoot();
 					}
 				}
+				p->Animate();
 			}
 		}
 		m_clock.restart();

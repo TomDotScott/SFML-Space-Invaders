@@ -12,6 +12,12 @@ public:
 	void Update();
 	void Render(sf::RenderWindow& _window) const;
 
+	void AddScore(const int _score)
+	{
+		m_score += _score;
+		m_scoreText.SetString("Score: " + std::to_string(m_score));
+	}
+	
 	const std::vector<std::vector<Alien*>>& GetGrid() const { return m_alienGrid; }
 	Player* GetPlayer() const { return m_player; }
 private:
@@ -24,7 +30,7 @@ private:
 
 	sf::Font m_font;
 	
-	UIText m_scoreText{"Score: ", sf::Color::White, {0, 0}, m_font, 16};
+	UIText m_scoreText{"Score: 0", sf::Color::White, {0, 0}, m_font, 16};
 	
 	sf::Clock m_clock;
 	
