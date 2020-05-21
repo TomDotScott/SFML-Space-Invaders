@@ -1,15 +1,12 @@
 #include "Alien.h"
 
 
+
 void Alien::Update()
 {
 	Animate();
-}
-
-
-void Alien::Update(const std::vector<std::vector<Entity*>>& _grid, Entity* _player) {
 	if (!m_projectile->GetShootable()) {
-		m_projectile->Update(_grid, _player);
+		m_projectile->Update();
 		m_canShoot = false;
 	} else {
 		m_canShoot = true;
@@ -24,6 +21,7 @@ void Alien::Animate() {
 
 	if (getPosition() != m_previousPosition) {
 		setTexture(m_textures[m_currentFrame]);
+		m_previousPosition = getPosition();
 	}
 
 	m_currentFrame++;
@@ -32,7 +30,6 @@ void Alien::Animate() {
 void Alien::Render(sf::RenderWindow& _window) const
 {
 	if (!m_projectile->GetShootable()) {
-		std::cout << "Drawing projectile" << std::endl;
 		_window.draw(*m_projectile);
 	}
 	_window.draw(*this);

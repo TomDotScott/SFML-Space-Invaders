@@ -13,7 +13,6 @@ public:
 	}
 
 	void Update();
-	void Update(const std::vector<std::vector<Entity*>>& _grid, Entity* _player);
 
 	void Animate();
 

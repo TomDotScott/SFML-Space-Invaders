@@ -53,5 +53,11 @@
     <ClInclude Include="Alien.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

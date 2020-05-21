@@ -1,13 +1,16 @@
 #include "Game.h"
 
 Game::Game() {
+	m_font.loadFromFile("Resources/gamefont.ttf");
+	m_scoreText.SetFont(m_font);
+	m_scoreText.SetPosition({m_scoreText.m_text.getGlobalBounds().width / 2, m_scoreText.m_text.getGlobalBounds().height / 2});
 	m_player = new Player("Player.png");
 	m_player->setPosition({
 		static_cast<float>(constants::k_screenWidth) / 2 - m_player->getGlobalBounds().width / 2,
 		constants::k_screenHeight - 64 });
 
 	for (int i = 0; i < constants::k_alienRows; ++i) {
-		std::vector<Entity*> alienRow;
+		std::vector<Alien*> alienRow;
 		for (int j = 0; j < constants::k_alienColumns; ++j) {
 			Alien* alien;
 			//decide the alien type
@@ -29,15 +32,15 @@ Game::Game() {
 }
 
 void Game::Update() {
-	m_player->Update(m_alienGrid);
-	for(auto row : m_alienGrid)
+	m_player->Update();
+	for(const auto& row : m_alienGrid)
 	{
 		for(auto alien : row)
 		{
-			Alien* alienP = dynamic_cast<Alien*>(alien);
+			auto* alienP = dynamic_cast<Alien*>(alien);
 			if(alienP)
 			{
-				alienP->Update(m_alienGrid, m_player);
+				alienP->Update();
 			}
 		}
 	}
@@ -55,7 +58,6 @@ void Game::Update() {
 						p->Shoot();
 					}
 				}
-				p->Update();
 			}
 		}
 		m_clock.restart();
@@ -64,6 +66,7 @@ void Game::Update() {
 
 void Game::Render(sf::RenderWindow& _window) const {
 	m_player->Render(_window);
+	_window.draw(m_scoreText.m_text);
 	for (int i = 0; i < constants::k_alienRows; ++i) {
 		for (int j = 0; j < constants::k_alienColumns; ++j) {
 			auto* alien = dynamic_cast<Alien*>(m_alienGrid[i][j]);

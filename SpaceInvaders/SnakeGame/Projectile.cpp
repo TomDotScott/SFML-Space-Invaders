@@ -2,7 +2,9 @@
 
 #include "Alien.h"
 #include "Constants.h"
-void Projectile::Update(const std::vector<std::vector<Entity*>>& _aliensGrid, Entity* _player) {
+#include "Game.h"
+
+void Projectile::Update() {
 	if (m_direction == EDirection::eUp) {
 		m_velocity = { 0, -1 };
 	}else{
@@ -14,14 +16,14 @@ void Projectile::Update(const std::vector<std::vector<Entity*>>& _aliensGrid, En
 	}
 
 	if (m_type == EType::ePlayer) {
-		CheckCollisions(_aliensGrid);
+		CheckCollisions(Game::Instance().GetGrid());
 		if (getPosition().y < 0) {
 			std::cout << "I WENT OFF THE SCREEN" << std::endl;
 			m_shootable = true;
 		}
 	}else
 	{
-		CheckCollision(_player);
+		CheckCollision(Game::Instance().GetPlayer());
 		if (getPosition().y > constants::k_screenHeight) {
 			std::cout << "I WENT OFF THE SCREEN" << std::endl;
 			m_shootable = true;
@@ -34,7 +36,7 @@ void Projectile::RandomiseSprite()
 	setTexture(m_textures[rand() % m_textures.size()]);
 }
 
-void Projectile::CheckCollisions(const std::vector<std::vector<Entity*>>& _aliensGrid) {
+void Projectile::CheckCollisions(const std::vector<std::vector<Alien*>>& _aliensGrid) {
 	for (const auto& row : _aliensGrid) {
 		for (auto alien : row) {
 			auto* alienPointer = dynamic_cast<Alien*>(alien);

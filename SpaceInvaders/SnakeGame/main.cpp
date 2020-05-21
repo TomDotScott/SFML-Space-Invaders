@@ -34,8 +34,8 @@ int main()
         }
 		window.clear();
 
-		game.Update();
-		game.Render(window);
+        Game::Instance().Update();
+        Game::Instance().Render(window);
 
 		window.display();
     }

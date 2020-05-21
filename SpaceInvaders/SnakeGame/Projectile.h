@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+
 enum class EDirection {
 	eUp, eDown, eLeft, eRight
 };
@@ -7,6 +8,8 @@ enum class EDirection {
 enum class EType {
 	eAlien, ePlayer
 };
+
+class Alien;
 
 class Projectile final : public Entity {
 public:
@@ -25,12 +28,12 @@ public:
 	}
 
 	
-	void Update(const std::vector<std::vector<Entity*>>& _aliensGrid, Entity* _player);
+	void Update();
 	bool GetShootable() const { return m_shootable; }
 	void SetShootable(const bool _shootable) { m_shootable = _shootable; }
 	void RandomiseSprite();
 private:
-	void CheckCollisions(const std::vector<std::vector<Entity*>>& _aliensGrid);
+	void CheckCollisions(const std::vector<std::vector<Alien*>>& _aliensGrid);
 	void CheckCollisions(Entity* _player);
 
 	bool m_shootable{ true };
