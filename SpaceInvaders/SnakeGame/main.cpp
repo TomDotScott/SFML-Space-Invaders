@@ -6,6 +6,7 @@
 
 int main()
 {
+	srand(time(NULL));
     // All SFML types and functions are contained in the sf namespace
 
     // Create an instance of the SFML RenderWindow type which represents the display

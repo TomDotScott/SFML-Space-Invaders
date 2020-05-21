@@ -31,7 +31,6 @@ void Alien::Animate() {
 
 void Alien::Render(sf::RenderWindow& _window) const
 {
-	std::cout << "Can I shoot? " << m_projectile->GetShootable() << std::endl;
 	if (!m_projectile->GetShootable()) {
 		std::cout << "Drawing projectile" << std::endl;
 		_window.draw(*m_projectile);

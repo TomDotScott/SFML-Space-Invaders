@@ -29,6 +29,18 @@ Game::Game() {
 }
 
 void Game::Update() {
+	m_player->Update(m_alienGrid);
+	for(auto row : m_alienGrid)
+	{
+		for(auto alien : row)
+		{
+			Alien* alienP = dynamic_cast<Alien*>(alien);
+			if(alienP)
+			{
+				alienP->Update(m_alienGrid, m_player);
+			}
+		}
+	}
 	
 	while (m_clock.getElapsedTime().asMilliseconds() >= 1000) {
 		MoveAliens();
@@ -37,8 +49,7 @@ void Game::Update() {
 				auto* p = dynamic_cast<Alien*>(alien);
 				if(p->GetCanShoot())
 				{
-					//5% chance of shooting
-					if(rand() % 100 == 5)
+					if(rand() % 100 == 1)
 					{
 						std::cout << "SHOOT" << std::endl;
 						p->Shoot();
@@ -77,7 +88,7 @@ void Game::MoveAliens() {
 			if (alien->GetAlive()) {
 				m_alienGrid[i][j]->setPosition(m_alienGrid[i][j]->getPosition().x + offset / 2, m_alienGrid[i][j]->getPosition().y);
 				if (m_currentDirection == EDirection::eRight) {
-					if (m_alienGrid[i][j]->getPosition().x + offset / 2 >= constants::k_screenWidth) {
+					if (m_alienGrid[i][j]->getPosition().x + offset >= constants::k_screenWidth) {
 						m_currentDirection = EDirection::eLeft;
 						movingDown = true;
 					}

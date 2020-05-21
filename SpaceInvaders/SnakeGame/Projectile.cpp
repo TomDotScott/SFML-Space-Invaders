@@ -13,16 +13,19 @@ void Projectile::Update(const std::vector<std::vector<Entity*>>& _aliensGrid, En
 		Entity::Update({ 1, 0.5f });
 	}
 
-	if (getPosition().y < 0) {
-		std::cout << "I WENT OFF THE SCREEN" << std::endl;
-		m_shootable = true;
-	}
-
 	if (m_type == EType::ePlayer) {
 		CheckCollisions(_aliensGrid);
+		if (getPosition().y < 0) {
+			std::cout << "I WENT OFF THE SCREEN" << std::endl;
+			m_shootable = true;
+		}
 	}else
 	{
 		CheckCollision(_player);
+		if (getPosition().y > constants::k_screenHeight) {
+			std::cout << "I WENT OFF THE SCREEN" << std::endl;
+			m_shootable = true;
+		}
 	}
 }
 
