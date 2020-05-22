@@ -1,6 +1,7 @@
 #include "Alien.h"
 
 #include "Game.h"
+#include "SoundManager.h"
 
 void Alien::Update() {
 	if (!m_projectile->GetShootable()) {
@@ -42,8 +43,8 @@ void Alien::Shoot() const {
 }
 
 void Alien::SetAlive(const bool _status) {
-
+	
 	m_alive = _status;
 	Game::Instance().AddScore(m_points);
-
+	SoundManager::Instance().PlaySFX("AlienDeath");
 }

@@ -4,7 +4,7 @@ class Singleton {
 public:	
 	static T& Instance()
 	{
-		if(Singleton::m_instance == 0)
+		if(Singleton::m_instance == nullptr)
 		{
 			Singleton::m_instance = CreateInstance();
 		}
@@ -14,10 +14,8 @@ public:
 protected:
 	virtual ~Singleton()
 	{
-		if(Singleton::m_instance != 0)
-		{
-			delete Singleton::m_instance;
-		}
+		delete Singleton::m_instance;
+
 		Singleton::m_instance = 0;
 	}
 	

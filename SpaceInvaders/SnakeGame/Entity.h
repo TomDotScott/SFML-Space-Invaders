@@ -6,7 +6,7 @@
 class Entity : public sf::Sprite {
 public:
 	void LoadTexture(const std::string& _fileName) {
-		if (m_texture.loadFromFile("Resources/" + _fileName)) {
+		if (m_texture.loadFromFile("Resources/Graphics/" + _fileName)) {
 			setTexture(m_texture);
 		}
 	};
@@ -15,7 +15,7 @@ public:
 		m_totalFrames = _amountOfFrames;
 		for (int i = 0; i < _amountOfFrames; i++) {
 			sf::Texture texture;
-			if (texture.loadFromFile("Resources/" + _fileName + std::to_string(i) + ".png")) {
+			if (texture.loadFromFile("Resources/Graphics/" + _fileName + std::to_string(i) + ".png")) {
 				m_textures.push_back(texture);
 			}
 		}

@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Constants.h"
+#include "SoundManager.h"
 
 void Player::Update()
 {
@@ -35,12 +36,13 @@ void Player::Render(sf::RenderWindow& _window) const
 	_window.draw(*this);
 }
 
-void Player::Shoot()
+void Player::Shoot() const
 {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
 		if(m_projectile->GetShootable())
 		{
+			SoundManager::Instance().PlaySFX("Shoot");
 			m_projectile->SetShootable(false);
 			m_projectile->setPosition({ getPosition().x + getGlobalBounds().width / 2,  getPosition().y});
 		}

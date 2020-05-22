@@ -1,7 +1,10 @@
 #include "Game.h"
 
+#include "SoundManager.h"
+
 Game::Game() {
-	m_font.loadFromFile("Resources/gamefont.ttf");
+	SoundManager::Instance().PlayMusic("Music");
+	m_font.loadFromFile("Resources/Graphics/gamefont.ttf");
 	m_scoreText.SetFont(m_font);
 	m_scoreText.SetPosition({m_scoreText.m_text.getGlobalBounds().width / 2, m_scoreText.m_text.getGlobalBounds().height / 2});
 	m_player = new Player("Player.png");

@@ -22,6 +22,6 @@ public:
 private:
 	bool m_canShoot{ true };
 	Projectile* m_projectile;
-	void Shoot();
+	void Shoot() const;
 };
 
