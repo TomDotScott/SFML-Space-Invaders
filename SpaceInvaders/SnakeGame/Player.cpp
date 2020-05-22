@@ -4,7 +4,7 @@
 
 void Player::Update()
 {
-	m_velocity.x = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) - sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+	m_velocity.x = static_cast<float>(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) - sf::Keyboard::isKeyPressed(sf::Keyboard::A));
 	Entity::Update({ 0.1f , 1});
 
 	if(getPosition().x < 0)

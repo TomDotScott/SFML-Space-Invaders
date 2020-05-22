@@ -35,14 +35,13 @@ void Alien::Render(sf::RenderWindow& _window) const {
 
 void Alien::Shoot() const {
 	if (m_projectile->GetShootable()) {
-		std::cout << "PROJECTILE SHOT" << std::endl;
 		m_projectile->SetShootable(false);
 		m_projectile->RandomiseSprite();
 		m_projectile->setPosition({ getPosition().x + getGlobalBounds().width / 2,  getPosition().y });
 	}
 }
 
-void Alien::SetAlive(const bool _status) {
+void Alien::Kill(const bool _status) {
 	
 	m_alive = _status;
 	Game::Instance().AddScore(m_points);

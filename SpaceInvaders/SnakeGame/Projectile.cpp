@@ -18,14 +18,12 @@ void Projectile::Update() {
 	if (m_type == EType::ePlayer) {
 		CheckCollisions(Game::Instance().GetGrid());
 		if (getPosition().y < 0) {
-			std::cout << "I WENT OFF THE SCREEN" << std::endl;
 			m_shootable = true;
 		}
 	}else
 	{
 		CheckCollision(Game::Instance().GetPlayer());
 		if (getPosition().y > constants::k_screenHeight) {
-			std::cout << "I WENT OFF THE SCREEN" << std::endl;
 			m_shootable = true;
 		}
 	}
@@ -39,10 +37,9 @@ void Projectile::RandomiseSprite()
 void Projectile::CheckCollisions(const std::vector<std::vector<Alien*>>& _aliensGrid) {
 	for (const auto& row : _aliensGrid) {
 		for (auto alien : row) {
-			auto* alienPointer = dynamic_cast<Alien*>(alien);
-			if (alienPointer->GetAlive()) {
+			if (alien->GetAlive()) {
 				if (CheckCollision(alien)) {
-					alienPointer->SetAlive(false);
+					alien->Kill(false);
 					m_shootable = true;
 				}
 			}

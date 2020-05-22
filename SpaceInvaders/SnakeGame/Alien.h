@@ -21,13 +21,14 @@ public:
 
 	void Shoot() const;
 
-	void SetAlive(const bool _status);
+	void Kill(const bool _status);
 	bool GetAlive() const { return m_alive; }
 	bool GetCanShoot() const { return m_canShoot; }
 
 private:
 	int m_currentFrame{ 0 };
 	sf::Vector2f m_previousPosition;
+
 	bool m_alive{ true };
 	Projectile* m_projectile;
 	bool m_canShoot{ true };

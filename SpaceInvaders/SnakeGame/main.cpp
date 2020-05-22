@@ -6,7 +6,7 @@
 
 int main()
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned>(time(nullptr)));
     // All SFML types and functions are contained in the sf namespace
 
     // Create an instance of the SFML RenderWindow type which represents the display
@@ -20,7 +20,7 @@ int main()
     {
         // Handle any pending SFML events
         // These cover keyboard, mouse,joystick etc.
-        sf::Event event;
+        sf::Event event{};
         while (window.pollEvent(event))
         {
           switch(event.type)

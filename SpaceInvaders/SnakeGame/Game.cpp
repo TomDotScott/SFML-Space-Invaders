@@ -55,9 +55,8 @@ void Game::Update() {
 				auto* p = dynamic_cast<Alien*>(alien);
 				if(p->GetCanShoot())
 				{
-					if(rand() % 100 == 1)
+					if(rand() % 100 <= 5)
 					{
-						std::cout << "SHOOT" << std::endl;
 						p->Shoot();
 					}
 				}
